@@ -1,0 +1,17 @@
+{
+    "name": "binarystar/we-meet",
+    "autoload": {
+        "psr-4": {
+            "MyApp\\": "core/classes"
+        }
+    },
+    "authors": [
+        {
+            "name": "SaikatGeek",
+            "email": "saikat.geek@gmail.com"
+        }
+    ],
+    "require": {
+        "cboden/ratchet": "^0.4"
+    }
+}
