@@ -1,3 +1,28 @@
+<?php
+    include "./core/init.php";
+    
+    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        if(isset($_POST)){
+            $email      =  trim(stripcslashes(htmlentities($_POST['email'])));
+            $password   =  $_POST['password'];
+
+            if(!empty($email) && !empty($password)){
+                if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                    $error = "Invalid Email Format!";
+                }else{
+
+                }
+
+            }else{
+                $error  =   "Please enter your email and password to login";
+            }
+        }
+    }
+
+
+
+?>
+
 <html>
 <head>
     <title>Live Video Chat Using PHP</title>
@@ -45,7 +70,11 @@
 
                         <input class="w-4/5 my-2 border border-gray-200 rounded px-4 py-2" type="password" name="password" placeholder="Password">
                          <div class="select-none  error text-red-500 text-xs p-2 px-2 w-auto self-start ml-20">
-                            <!-- ERROR -->
+                            <?php
+                                if(isset($error)){
+                                    echo $error;
+                                }
+                            ?>
                         </div>
                     </div>
                     <div>
