@@ -1,6 +1,8 @@
 <?php
     include "./core/init.php";
 
+    echo $userObj->hash('password');
+
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         if(isset($_POST)){
             $email      =  trim(stripcslashes(htmlentities($_POST['email'])));
@@ -10,7 +12,12 @@
                 if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
                     $error = "Invalid Email Format!";
                 }else{
-
+                    if($user = $userObj->emailExist($email)){
+                       var_dump($user);
+                    }
+                    else{
+                        
+                    }
                 }
 
             }else{
