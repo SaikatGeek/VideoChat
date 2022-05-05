@@ -13,11 +13,16 @@
                     $error = "Invalid Email Format!";
                 }else{
                     if($user = $userObj->emailExist($email)){
-                       var_dump($user);
+                       if(password_verify($password, $user->password)){
+                            session_id_regenerate();
+                            $_SESSION['userID'] = $user->userID;
+                            $userObj->redirect('home.php');
+                       }else{
+                            $error = "Incorrect email or password";
+                       }
+                
                     }
-                    else{
-                        
-                    }
+                    
                 }
 
             }else{

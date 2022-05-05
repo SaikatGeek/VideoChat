@@ -20,8 +20,6 @@ class User
         
         $user = $statement->fetch(PDO::FETCH_OBJ);
 
-        var_dump($user);
-
         if(!empty($user)){
             return $user;
         }
