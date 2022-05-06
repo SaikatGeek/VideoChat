@@ -64,6 +64,17 @@ class User
         return $statement->fetch(PDO::FETCH_OBJ);
     }
 
+    public function getUsers()
+    {
+        $statement = $this->db->prepare("SELECT * FROM `users` WHERE `userID` != :userID");
+
+        $statement->bindParam(':userID', $this->userID, PDO::PARAM_INT);
+
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_OBJ);
+    }
+
     public function logout()
     {
         $_SESSION = [];
@@ -71,5 +82,7 @@ class User
         session_regenerate_id();
         $this->redirect('index.php');
     }
+
+
     
 }

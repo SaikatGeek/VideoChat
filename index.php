@@ -26,9 +26,7 @@
                     }else{
                         $error = "Incorrect email or password";
                     }
-                    
                 }
-
             }else{
                 $error  =   "Please enter your email and password to login";
             }
