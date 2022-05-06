@@ -1,8 +1,6 @@
 <?php
     include "./core/init.php";
 
-    echo $userObj->hash('password');
-
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         if(isset($_POST)){
             $email      =  trim(stripcslashes(htmlentities($_POST['email'])));
@@ -14,7 +12,7 @@
                 }else{
                     if($user = $userObj->emailExist($email)){
                        if(password_verify($password, $user->password)){
-                            session_id_regenerate();
+                            session_regenerate_id();
                             $_SESSION['userID'] = $user->userID;
                             $userObj->redirect('home.php');
                        }else{
