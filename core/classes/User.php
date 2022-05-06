@@ -2,12 +2,20 @@
 
 class User
 {
-    public $db;
+    public $db, $userID;
 
     public function __construct()
     {
-        $db = new DB;
-        $this->db = $db->connect();
+        $db             = new DB;
+        $this->db       = $db->connect();
+        $this->userID   = $this->ID();
+    }
+
+    public function ID()
+    {
+        if($this->isLoggedIn()){
+            return $_SESSION['userID'];
+        }
     }
 
     public function emailExist($email)
@@ -36,6 +44,32 @@ class User
     public function redirect($location)
     {
         header("Location: ".BASE_URL.$location);
+    }
+
+    public function isLoggedIn()
+    {
+        return isset($_SESSION['userID']) ? true : false;
+    }
+
+    public function userData($userID = "")
+    {
+        $userID = empty($userID) ? $this->userID : $userID;
+
+        $statement = $this->db->prepare("SELECT * FROM `users` WHERE `userID` = :userID");
+        
+        $statement->bindParam(':userID', $userID, PDO::PARAM_STR);
+        
+        $statement->execute();
+        
+        return $statement->fetch(PDO::FETCH_OBJ);
+    }
+
+    public function logout()
+    {
+        $_SESSION = [];
+        session_destroy();
+        session_regenerate_id();
+        $this->redirect('index.php');
     }
     
 }
