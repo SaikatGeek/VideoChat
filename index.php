@@ -1,8 +1,13 @@
 <?php
     include "./core/init.php";
 
-    if($userObj->isLoggedIn()){
-        $userObj->redirect('home.php');
+    // if($userObj->isLoggedIn()){
+    //     $userObj->redirect('home.php');
+    // }
+    
+    if(isset($_SERVER['PATH_INFO'])){
+        $_SESSION["username"] = trim($_SERVER['PATH_INFO'], "/");
+        $userObj->redirect('connect.php');
     }
 
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
