@@ -128,7 +128,7 @@
                 </div>
             </div>
         </div>
-        <!--PROFILE_SECTION_END-->
+       <!--PROFILE_SECTION_END-->
        <!-- VIDEO -->
        <!--VIDEO_CALL-->
         <div id="video" class="hidden overflow-hidden flex items-center">
