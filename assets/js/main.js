@@ -16,6 +16,7 @@ const constraints ={
 const localVideo = document.querySelector("#localVideo");
 const remoteVideo = document.querySelector("#remoteVideo");
 
+// RTC Peer Connection
 function getConnection(){
     if(!peerConnection){
         peerConnection =  new RTCPeerConnection();
@@ -35,7 +36,7 @@ async function getCamera(){
         mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
         localVideo.srcObject = mediaStream;
         localStream = mediaStream;
-        localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
+        localStream.getTracks().forEach(track => peerConnection.addTrack(track, mediaStream));
 
     }catch(error){
         console.log(error);
