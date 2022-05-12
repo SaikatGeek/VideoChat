@@ -47,6 +47,8 @@ $("#callBtn").on('click', () => {
     getCamera();
 });
 
-
+conn.onopen = e => {
+    console.log("connected to websocket");
+}
 
 
