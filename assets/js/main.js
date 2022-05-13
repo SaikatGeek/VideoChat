@@ -51,4 +51,14 @@ conn.onopen = e => {
     console.log("connected to websocket");
 }
 
+conn.onmessage = e => {
 
+}
+
+function send(type, data, sendTo){
+    conn.send(JSON.stringify({
+         sendTo: sendTo,
+         type  : type,
+         data  : data
+    }));
+}
