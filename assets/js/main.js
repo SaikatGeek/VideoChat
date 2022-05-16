@@ -51,4 +51,6 @@ conn.onopen = e => {
     console.log("connected to websocket");
 }
 
-
+conn.onmessage = e => {
+    
+}
