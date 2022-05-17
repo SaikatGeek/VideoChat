@@ -52,10 +52,6 @@ conn.onopen = e => {
 }
 
 conn.onmessage = e => {
-<<<<<<< HEAD
-    
-}
-=======
 
 }
 
@@ -66,4 +62,3 @@ function send(type, data, sendTo){
          data  : data
     }));
 }
->>>>>>> 937b0bfa883518c5939bd6d286431f56b04e0bba

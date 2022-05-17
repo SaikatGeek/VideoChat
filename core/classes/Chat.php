@@ -1,5 +1,7 @@
 <?php
+
 namespace MyApp;
+use MyApp\User;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 
@@ -8,12 +10,13 @@ class Chat implements MessageComponentInterface {
 
     public function __construct() {
         $this->clients = new \SplObjectStorage;
+        $this->userObj = new User;
     }
 
     public function onOpen(ConnectionInterface $conn) {
         // Store the new connection to send messages to later
         $this->clients->attach($conn);
-
+        var_dump($this->userObj->userData("1"));
         echo "New connection! ({$conn->resourceId})\n";
     }
 
