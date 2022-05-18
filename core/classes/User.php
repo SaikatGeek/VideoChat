@@ -117,7 +117,15 @@ class User
         return $statement->fetch(PDO::FETCH_OBJ);
     }
 
-
+    public function updateConnection($connectionID, $userID)
+    {
+        $statement = $this->db->prepare("UPDATE `users` SET `connectionID` = :connectionID  WHERE `userID` = :userID");
+        
+        $statement->bindParam(':connectionID', $connectionID, PDO::PARAM_STR);
+        $statement->bindParam(':userID', $userID, PDO::PARAM_INT);
+        
+        $statement->execute();
+    }
 
     public function logout()
     {
@@ -127,6 +135,4 @@ class User
         $this->redirect('index.php');
     }
 
-
-    
 }
