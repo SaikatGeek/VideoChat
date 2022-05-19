@@ -12,6 +12,10 @@ const constraints ={
     video: true
 }
 
+const options = {
+    offerToReceiveVideo: 1,
+}
+
 // Video Elements
 const localVideo = document.querySelector("#localVideo");
 const remoteVideo = document.querySelector("#remoteVideo");
@@ -43,8 +47,25 @@ async function getCamera(){
     }
 }
 
+async function creatOffer(sendTo){
+    await sendIceCandidate(sendTo);
+    await pc.createOffer(options);
+    await pc.setLocalDescription(pc.localDescription);
+    send('client-offer', pc.localDescription, sendTo);
+}
+
+function sendIceCandidate(sendTo){
+    pc.onicecandidate = e => {
+        if(e.candidate !== null){
+            //send ice candidate to other client
+            send('client-candidate', e.candidate, sendTo);
+        }
+    }
+}
+
 $("#callBtn").on('click', () => {
     getCamera();
+    send('is-client-ready', null, sendTo);
 });
 
 conn.onopen = e => {

@@ -8,7 +8,6 @@
 
     $user = $userObj->userData()
 
-
 ?>
 
 <!DOCTYPE html>
