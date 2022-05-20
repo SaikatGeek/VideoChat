@@ -35,11 +35,22 @@ class Chat implements MessageComponentInterface {
         $numRecv = count($this->clients) - 1;
         echo sprintf('Connection %d sending message "%s" to %d other connection%s' . "\n"
             , $from->resourceId, $msg, $numRecv, $numRecv == 1 ? '' : 's');
+        $data    = json_decode($msg, true);
+        $sendTo  = $this->userObj->userData($data['sendTo']);
+
+        $sendTo['sendTo']         = $sendTo->userID;
+        $sendTo['by']             = $sendTo->data->userID;
+        $sendTo['profileImage']   = $sendTo->data->profileImage;
+        $sendTo['username']       = $sendTo->data->username;
+        $sendTo['type']           = $data['type'];
+        $sendTo['data']           = $data['data'];
 
         foreach ($this->clients as $client) {
             if ($from !== $client) {
                 // The sender is not the receiver, send to each client connected
-                $client->send($msg);
+                if($client->resourceId == $sendTo->connectionID || $from == $client ){
+                    $client->send($msg);
+                }
             }
         }
     }

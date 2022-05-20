@@ -7,4 +7,5 @@ require "classes/User.php";
 
 $userObj = new MyApp\User;
 
-define('BASE_URL', 'http://localhost:8080/');
+define('BASE_URL', 'http://localhost:8060/');
+
